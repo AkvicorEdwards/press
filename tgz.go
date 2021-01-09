@@ -37,7 +37,7 @@ func Tgz(sources []string, targetPath, targetFilename string) error {
 func TgzToFileIO(sources []string, target *os.File) (err error) {
 	gzipWriter := gzip.NewWriter(target)
 	defer func() {
-		err = target.Close()
+		err = gzipWriter.Close()
 		if err != nil {
 			log.Println(err)
 		}
@@ -45,7 +45,7 @@ func TgzToFileIO(sources []string, target *os.File) (err error) {
 
 	writer := tar.NewWriter(gzipWriter)
 	defer func() {
-		err = gzipWriter.Close()
+		err = writer.Close()
 		if err != nil {
 			log.Println(err)
 		}

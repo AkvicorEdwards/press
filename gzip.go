@@ -26,6 +26,13 @@ func Gzip(source, targetPath, targetFilename string) error {
 	if err != nil {
 		return err
 	}
+	defer func() {
+		err = reader.Close()
+		if err != nil {
+			log.Println(err)
+		}
+	}()
+
 	if targetFilename == "" {
 		targetFilename = fmt.Sprintf("%s.gz", filepath.Base(source))
 	}

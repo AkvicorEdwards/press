@@ -128,6 +128,7 @@ func UnTarFromFileIO(tarball *os.File, target string) error {
 	}
 
 	tarReader := tar.NewReader(tarball)
+
 	return UnTarFromReader(tarReader, target)
 }
 
